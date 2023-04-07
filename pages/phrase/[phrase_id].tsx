@@ -19,9 +19,9 @@ function Ctx_phrase(props:Props) {
   const { data, error, isLoading } = useSWR(`http://127.0.0.1:8000/all_phrases/${props.phrase_id}`, fetcher)
   const fraze = data as AllPhraseType
   const id = props.phrase_id.toString()
-  if (error) return <div>falhou em carregar</div>
-  if (isLoading) return <div>carregando...</div>
-  return (<div id={id}>{fraze.phrase}!</div>)
+  if (error) return <div className={styles.context}>falhou em carregar</div>
+  if (isLoading) return <div className={styles.context}>carregando...</div>
+  return (<div id={id} className={styles.context}>{fraze.phrase}!</div>)
 }
 
 function Phrase({data}:{data:PhraseType}) {
@@ -48,7 +48,7 @@ function Phrase({data}:{data:PhraseType}) {
             </Head>
             <main className={styles.main}>
                 <div className={styles.container}>
-                    <div className={styles.meta}><span>id: {data._id}</span><span>a_id:{data.a_id}</span><a target="_blank"  href={doc_path}>pdf</a></div>
+                    <div className={styles.meta}><span>id: {data._id}</span><span>a_id: {data.a_id}</span><a target="_blank"  href={doc_path}>pdf</a></div>
                     <button onClick={onAddCtxBf}>...</button>
                     {context_before}
                     <div className={styles.prase}>{data.phrase}</div>
